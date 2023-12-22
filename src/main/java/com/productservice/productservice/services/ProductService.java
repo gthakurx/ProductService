@@ -1,7 +1,8 @@
 package com.productservice.productservice.services;
 
 import com.productservice.productservice.dtos.FakeStoreProductDto;
+import com.productservice.productservice.dtos.GenericProductDto;
 
 public interface ProductService {
-    FakeStoreProductDto getProductById(Long Id);
+    GenericProductDto getProductById(Long Id);
 }
