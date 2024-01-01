@@ -37,6 +37,8 @@ public class FakeStoreClient {
         RestTemplate restTemplate=restTemplateBuilder.build();
 //        ResponseEntity<List<FakeStoreProductDto>> responseEntity =
 //                restTemplate.getForEntity(getAllProducturl,List<FakeStoreProductDto>.class);
+        //this will not work due to java type erasure , ArrayList<anything> will change to Arraylist.class and type doesnot matter
+        //at runt time so we need to mention Fakestoreproductdto type hence dont use Arraylist please use Array instead
         ResponseEntity<FakeStoreProductDto[]> responseEntity=
                 restTemplate.getForEntity(getGenericProducturl, FakeStoreProductDto[].class);
        return List.of(responseEntity.getBody());
