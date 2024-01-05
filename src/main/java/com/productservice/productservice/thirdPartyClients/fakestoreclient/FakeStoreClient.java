@@ -3,6 +3,7 @@ package com.productservice.productservice.thirdPartyClients.fakestoreclient;
 import com.productservice.productservice.dtos.FakeStoreProductDto;
 import com.productservice.productservice.dtos.GenericProductDto;
 import com.productservice.productservice.exceptions.ProductNotFoundException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +16,17 @@ import java.util.List;
 @Component
 public class FakeStoreClient {
     private RestTemplateBuilder restTemplateBuilder;
-    private String getsingleproducturl ="https://fakestoreapi.com/products/{id}";
-    private String getGenericProducturl ="https://fakestoreapi.com/products";
-
-    FakeStoreClient(RestTemplateBuilder restTemplateBuilder){
+    //private String getsingleproducturl ="https://fakestoreapi.com/products/{id}";
+    //private String getGenericProducturl ="https://fakestoreapi.com/products";
+    private String fakestoreUrl;
+    private String pathforproduct;
+    private String getsingleproducturl;
+    private String getGenericProducturl;
+    FakeStoreClient(RestTemplateBuilder restTemplateBuilder, @Value("${fakestore.api.url}") String fakestoreUrl,
+                    @Value("${faskestor.api.paths.product}") String pathforproduct){
         this.restTemplateBuilder=restTemplateBuilder;
+        this.getsingleproducturl=fakestoreUrl+pathforproduct+"/{id}";
+        this.getGenericProducturl=fakestoreUrl+pathforproduct;
     }
 
     public FakeStoreProductDto getProductById(Long Id) throws ProductNotFoundException {
