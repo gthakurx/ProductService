@@ -15,6 +15,6 @@ public class Product extends BaseModel {
     private int price;
     private String imageurl;
     @ManyToOne
-    private Category category;
+    private Category category;//Id of many on 1 side will come in database here ID for coloumn will come to product sdie
 
 }
